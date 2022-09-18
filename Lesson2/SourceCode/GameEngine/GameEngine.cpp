@@ -12,6 +12,8 @@
 #include "CubeGameObject.h"
 #include "GameTimer.h"
 
+#include "KeyLayout.h"
+
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -36,6 +38,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     timer.Start();
     timer.Reset();
 
+    float cubePosition = 0.0f;
+    float deltaPosition = 5.f;
+
+    KeyLayout keyLayout;
+    keyLayout.ParseConfig();
+
     // Main message loop:
     while (msg.message != (WM_QUIT | WM_CLOSE))
     {
@@ -47,9 +55,18 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         else
         {
             float t = 0;
+            float modifier = 0.f;
             timer.Tick();
-            t = sin(timer.TotalTime())*2;
-            cube->SetPosition(t, 0.0f, 0.0f);
+
+            //Check if keys are pressed now
+            if (GetAsyncKeyState(keyLayout.GetRight()) & (1 << 15)) {
+              modifier = 1.f;
+            } else if (GetAsyncKeyState(keyLayout.GetLeft()) & (1 << 15)) {
+              modifier = -1.f;
+            }
+
+            cubePosition += deltaPosition * timer.DeltaTime() * modifier;
+            cube->SetPosition(cubePosition, 0.0f, 0.0f);
 
             renderThread->OnEndFrame();
         }
