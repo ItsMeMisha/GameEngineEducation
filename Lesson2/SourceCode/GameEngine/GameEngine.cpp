@@ -61,16 +61,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             timer.Tick();
 
             //Check if keys are pressed now
-            if (GetAsyncKeyState(keyLayout.GetRight()) & (1 << 15)) {
+            if (GetAsyncKeyState(keyLayout.GetKey(RIGHT)) & (1 << 15)) {
               modifierX = 1.f;
-            } else if (GetAsyncKeyState(keyLayout.GetLeft()) & (1 << 15)) {
+            } else if (GetAsyncKeyState(keyLayout.GetKey(LEFT)) & (1 << 15)) {
               modifierX = -1.f;
             }
 
-            if (GetAsyncKeyState(keyLayout.GetUp()) & (1 << 15)) {
+            if (GetAsyncKeyState(keyLayout.GetKey(UP)) & (1 << 15)) {
               modifierZ = 1.f;
             }
-            else if (GetAsyncKeyState(keyLayout.GetDown()) & (1 << 15)) {
+            else if (GetAsyncKeyState(keyLayout.GetKey(DOWN)) & (1 << 15)) {
               modifierZ = -1.f;
             }
 
