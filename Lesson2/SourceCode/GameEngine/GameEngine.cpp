@@ -38,7 +38,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     timer.Start();
     timer.Reset();
 
-    float cubePosition = 0.0f;
+    float cubePositionX = 0.0f;
+    float cubePositionZ = 0.0f;
     float deltaPosition = 5.f;
 
     KeyLayout keyLayout;
@@ -55,18 +56,27 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         else
         {
             float t = 0;
-            float modifier = 0.f;
+            float modifierX = 0.f;
+            float modifierZ = 0.f;
             timer.Tick();
 
             //Check if keys are pressed now
             if (GetAsyncKeyState(keyLayout.GetRight()) & (1 << 15)) {
-              modifier = 1.f;
+              modifierX = 1.f;
             } else if (GetAsyncKeyState(keyLayout.GetLeft()) & (1 << 15)) {
-              modifier = -1.f;
+              modifierX = -1.f;
             }
 
-            cubePosition += deltaPosition * timer.DeltaTime() * modifier;
-            cube->SetPosition(cubePosition, 0.0f, 0.0f);
+            if (GetAsyncKeyState(keyLayout.GetUp()) & (1 << 15)) {
+              modifierZ = 1.f;
+            }
+            else if (GetAsyncKeyState(keyLayout.GetDown()) & (1 << 15)) {
+              modifierZ = -1.f;
+            }
+
+            cubePositionX += deltaPosition * timer.DeltaTime() * modifierX;
+            cubePositionZ += deltaPosition * timer.DeltaTime() * modifierZ;
+            cube->SetPosition(cubePositionX, 0.0f, cubePositionZ);
 
             renderThread->OnEndFrame();
         }

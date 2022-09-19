@@ -18,6 +18,12 @@ int ConfigHandler(void* user, const char* section, const char* name, const char*
   else if (strcmp(name, "GoRight") == 0) {
     layout->mToRight = value[0];
   }
+  else if (strcmp(name, "GoUp") == 0) {
+    layout->mUp = value[0];
+  }
+  else if (strcmp(name, "GoDown") == 0) {
+    layout->mDown = value[0];
+  }
   else {
     return 0;
   }
