@@ -11,6 +11,7 @@ InputHandler::InputHandler()
 
 	MapSymbol("a", 'A');
 	MapSymbol("d", 'D');
+	MapSymbol("z", 'Z');
 	MapSymbol("left", VK_LEFT);
 	MapSymbol("right", VK_RIGHT);
 	MapSymbol("space", VK_SPACE);
@@ -18,6 +19,7 @@ InputHandler::InputHandler()
 	MapCommandSymbol("GoLeft", eIC_GoLeft, "a");
 	MapCommandSymbol("GoRight", eIC_GoRight, "d");
 	MapCommandSymbol("Jump", eIC_Jump, "space");
+	MapCommandSymbol("Shoot", eIC_Shoot, "z");
 
 	LoadConfiguration();
 

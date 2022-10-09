@@ -115,6 +115,16 @@ void RenderEngine::CreateCubeRenderObject(RenderProxy* renderProxy)
 	m_renderObjects.emplace_back(renderObject);
 }
 
+void RenderEngine::RemoveRenderObject(RenderProxy* renderProxy)
+{
+	m_renderObjects.erase(std::remove_if(m_renderObjects.begin(), m_renderObjects.end(),
+		[&](const RenderObject* renderObject)
+		{
+			return renderObject->GetRenderProxy() == renderProxy;
+		}), 
+		m_renderObjects.end());
+}
+
 RenderThread* const RenderEngine::GetRT()
 {
 	return m_pRT;

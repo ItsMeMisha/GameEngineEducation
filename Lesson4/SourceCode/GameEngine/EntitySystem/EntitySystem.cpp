@@ -3,6 +3,7 @@
 #include "ecsMesh.h"
 #include "ecsControl.h"
 #include "ecsPhys.h"
+#include "ecsLifespan.h"
 
 EntitySystem::EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandler)
 {
@@ -11,6 +12,7 @@ EntitySystem::EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandle
     ecs.entity("renderEngine")
         .set(RenderEnginePtr{ renderEngine });
 
+    register_ecs_lifespan_systems(ecs);
     register_ecs_mesh_systems(ecs);
     register_ecs_control_systems(ecs);
     register_ecs_phys_systems(ecs);
@@ -25,6 +27,7 @@ EntitySystem::EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandle
         .set(BouncePlane{ 0.f, 1.f, 0.f, 0.f })
         .set(Bounciness{ 0.3f })
         .add<Controllable>()
+        .add<Shooter>()
         .add<CubeMesh>();
 
     auto cubeMoving = ecs.entity()

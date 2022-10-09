@@ -172,6 +172,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="EntitySystem\ecsControl.h" />
+    <ClInclude Include="EntitySystem\ecsLifespan.h" />
     <ClInclude Include="EntitySystem\ecsMesh.h" />
     <ClInclude Include="EntitySystem\ecsPhys.h" />
     <ClInclude Include="EntitySystem\ecsSystems.h" />
@@ -184,6 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EntitySystem\ecsControl.cpp" />
+    <ClCompile Include="EntitySystem\ecsLifespan.cpp" />
     <ClCompile Include="EntitySystem\ecsMesh.cpp" />
     <ClCompile Include="EntitySystem\ecsPhys.cpp" />
     <ClCompile Include="EntitySystem\EntitySystem.cpp" />
@@ -191,6 +193,9 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="InputHandler.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Assets\Configs\actionmap.ini" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

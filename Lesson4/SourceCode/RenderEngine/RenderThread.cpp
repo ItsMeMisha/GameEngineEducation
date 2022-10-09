@@ -62,6 +62,13 @@ void RenderThread::EnqueueCommand(ERenderCommand command, Args... args)
 				std::forward<Args>(args)...)
 		);
 		break;
+	case RC_RemoveRenderObject:
+		m_commands[m_nFrameToFill].push_back(
+			new EnqueuedRenderCommand(
+				[this](RenderProxy* renderProxy) { m_pRenderEngine->RemoveRenderObject(renderProxy); },
+				std::forward<Args>(args)...)
+		);
+		break;
 	default:
 		assert(0);
 		break;

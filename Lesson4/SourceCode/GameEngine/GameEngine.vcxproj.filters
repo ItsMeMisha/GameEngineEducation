@@ -45,6 +45,9 @@
     <ClInclude Include="EntitySystem\EntitySystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EntitySystem\ecsLifespan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngine.cpp">
@@ -71,5 +74,13 @@
     <ClCompile Include="EntitySystem\EntitySystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EntitySystem\ecsLifespan.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Assets\Configs\actionmap.ini">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
