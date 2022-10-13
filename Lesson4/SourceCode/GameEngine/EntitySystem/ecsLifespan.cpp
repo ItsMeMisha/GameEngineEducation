@@ -21,7 +21,6 @@ void register_ecs_lifespan_systems(flecs::world& ecs)
       {
         if (life.lifetime >= life.lifespan) {
           re.ptr->GetRT()->EnqueueCommand(RC_RemoveRenderObject, renderProxyPtr.ptr);
-          ent.remove<RenderProxyPtr>();
         }
       });
     });

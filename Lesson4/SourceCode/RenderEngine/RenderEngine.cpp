@@ -115,7 +115,7 @@ void RenderEngine::CreateCubeRenderObject(RenderProxy* renderProxy)
 	m_renderObjects.emplace_back(renderObject);
 }
 
-void RenderEngine::RemoveRenderObject(RenderProxy* renderProxy)
+void RenderEngine::RemoveRenderObject(RenderProxy* renderProxy) //Meory Leaks!!
 {
 	m_renderObjects.erase(std::remove_if(m_renderObjects.begin(), m_renderObjects.end(),
 		[&](const RenderObject* renderObject)
