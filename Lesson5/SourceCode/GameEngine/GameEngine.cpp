@@ -32,7 +32,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     InputHandler* inputHandler = new InputHandler();
     CScriptSystem* scriptSystem = new CScriptSystem();
 
-    EntitySystem* entitySystem = new EntitySystem(renderEngine, inputHandler);
+    EntitySystem* entitySystem = new EntitySystem(renderEngine, inputHandler, "../../../Assets/Configs/entities.xml");
 
     MSG msg = { 0 };
 

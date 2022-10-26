@@ -8,7 +8,7 @@ class EntitySystem
 {
 public:
 	EntitySystem() = delete;
-	EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandler);
+	EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandler, const char* EntityFilePath);
 
 	void Update();
 private:

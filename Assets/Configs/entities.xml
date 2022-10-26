@@ -1,0 +1,16 @@
+<world>
+
+<entity>
+  <movement Position="5.0,0.0,0.0" Velocity="0.0,0.0,0.0" Speed="10.0" JumpSpeed="10.0"/>
+  <physics FrictionAmount="0.9" Gravity="0.0,-9.8065,0.0" BouncePlane="0.0,1.0,0.0,0.0" Bounciness="0.3" />
+  <mesh CubeMesh=""/>
+  <control Controllable=""/>
+</entity>
+  
+<entity>
+  <movement Position="0.0,0.0,0.0" Velocity="0.0,3.0,0.0"/>
+  <physics Gravity="0.0,-9.8065f,0.0" BouncePlane="0.0,1.0,0.0,5.0" Bounciness="1.0"/>
+  <mesh CubeMesh=""/>
+</entity>
+  
+</world>
