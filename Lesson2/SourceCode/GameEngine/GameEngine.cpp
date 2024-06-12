@@ -12,6 +12,8 @@
 #include "CubeGameObject.h"
 #include "GameTimer.h"
 
+#include "KeyLayout.h"
+
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -36,6 +38,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     timer.Start();
     timer.Reset();
 
+    float cubePositionX = 0.0f;
+    float cubePositionZ = 0.0f;
+    float deltaPosition = 5.f;
+
+    KeyLayout keyLayout;
+    keyLayout.ParseConfig();
+
     // Main message loop:
     while (msg.message != (WM_QUIT | WM_CLOSE))
     {
@@ -47,9 +56,27 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         else
         {
             float t = 0;
+            float modifierX = 0.f;
+            float modifierZ = 0.f;
             timer.Tick();
-            t = sin(timer.TotalTime())*2;
-            cube->SetPosition(t, 0.0f, 0.0f);
+
+            //Check if keys are pressed now
+            if (GetAsyncKeyState(keyLayout.GetKey(RIGHT)) & (1 << 15)) {
+              modifierX = 1.f;
+            } else if (GetAsyncKeyState(keyLayout.GetKey(LEFT)) & (1 << 15)) {
+              modifierX = -1.f;
+            }
+
+            if (GetAsyncKeyState(keyLayout.GetKey(UP)) & (1 << 15)) {
+              modifierZ = 1.f;
+            }
+            else if (GetAsyncKeyState(keyLayout.GetKey(DOWN)) & (1 << 15)) {
+              modifierZ = -1.f;
+            }
+
+            cubePositionX += deltaPosition * timer.DeltaTime() * modifierX;
+            cubePositionZ += deltaPosition * timer.DeltaTime() * modifierZ;
+            cube->SetPosition(cubePositionX, 0.0f, cubePositionZ);
 
             renderThread->OnEndFrame();
         }
