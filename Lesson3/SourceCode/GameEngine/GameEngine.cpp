@@ -13,6 +13,9 @@
 #include "GameTimer.h"
 #include "InputHandler.h"
 
+#include "CubeSlideComponent.h"
+#include "CubeControlComponent.h"
+#include "CubeJumpComponent.h"
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -30,8 +33,32 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     RenderThread* renderThread = renderEngine->GetRT();
     InputHandler* inputHandler = new InputHandler();
 
-    GameObject* cube = new CubeGameObject();
-    renderThread->EnqueueCommand(RC_CreateCubeRenderObject, cube->GetRenderProxy());
+    GameObject* cubes[100] = {};
+    ObjectComponent* component = nullptr;
+    srand(time(0));
+
+    for (int i = 0; i < 100; ++i) {
+      cubes[i] = new CubeGameObject();
+      renderThread->EnqueueCommand(RC_CreateCubeRenderObject, cubes[i]->GetRenderProxy());
+
+      cubes[i]->SetPosition(-15 + 3 * (i % 10), -15, -3 + 3 * (i / 10));
+      switch (rand() % 3)
+      {
+      case 0:
+        component = new CubeControlComponent(cubes[i], inputHandler);
+        break;
+
+      case 1:
+        component = new CubeJumpComponent(cubes[i]);
+        break;
+
+      case 2:
+        component = new CubeSlideComponent(cubes[i]);
+        break;
+      }
+
+      cubes[i]->SetComponent(component);
+    }
 
     MSG msg = { 0 };
 
@@ -54,15 +81,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
             float t = 0;
             timer.Tick();
-            t = sin(timer.TotalTime())*2;
+            float elapsedTime = timer.DeltaTime();
 
-            float velocity = 0.0f;
-            if (inputHandler->GetInputState().test(eIC_GoLeft))
-                velocity -= 1.0f;
-            if (inputHandler->GetInputState().test(eIC_GoRight))
-                velocity += 1.0f;
-            newPositionX += velocity * timer.DeltaTime();
-            cube->SetPosition(newPositionX, 0.0f, 0.0f);
+            for (int i = 0; i < 100; ++i) {
+              cubes[i]->GetComponent()->Update(elapsedTime);
+            }
 
             renderThread->OnEndFrame();
         }
